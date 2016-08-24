@@ -20,15 +20,17 @@
   [:textarea {:value @value
               :on-change #(reset! value (-> % .-target .-value))}])
 
+(def players-txt (atom ""))
+(def attendance-txt (atom ""))
+
 (defn root []
-  (let [players-txt (atom "")
-        attendance-txt (atom "")]
-    [[(editor players-txt)]
-     [(editor attendance-txt)]
-     (let [players (parse-players players-txt)
-           attendance (parse-attendance attendance-txt)
-           teams (group-teams (can-play players attendance))]
-       [:p "TODO: Everything."])]))
+  [:div
+   [editor players-txt]
+   [editor attendance-txt]
+   (let [players (parse-players players-txt)
+         attendance (parse-attendance attendance-txt)
+         teams (group-teams (can-play players attendance))]
+     [:p "TODO: Everything. " (count @players-txt) " - " (count @attendance-txt)])])
 
 ;; -------------------------
 ;; Initialize app
