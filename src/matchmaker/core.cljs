@@ -4,6 +4,7 @@
 
 (defonce players-tsv (atom ""))
 (defonce attendance-tsv (atom ""))
+(defonce shuffle-count (atom 0))
 
 (def rank-scores
   {"NONE" 0
@@ -99,8 +100,10 @@
   [:ul.teams (map (fn [t] [:li {:key (hash t)} (team t)]) teams)])
 
 (defn results []
+  @shuffle-count
   (let [result (make-teams)]
     [:section.results
+     [:button {:on-click #(swap! shuffle-count inc)} "Shuffle!"]
      [:section.teams
       [:h3 "Teams"]
       (team-list (:teams result))]
