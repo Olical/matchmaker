@@ -73,12 +73,29 @@ a:hover {
   margin: 0;
 }
 
-.team-pair .team-a {
+.team-a {
   text-align: right;
 }
 
+.rank {
+  margin-right: 0.5em;
+}
+
+.team-a .rank {
+  float: right;
+  margin-left: 0.5em;
+  margin-right: 0;
+}
+
 .remainder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.remainder h2 {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .remainder ul {

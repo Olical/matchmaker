@@ -86,7 +86,7 @@
    [editor "Attendance" attendance-tsv]])
 
 (defn player [p]
-  [:p (:name p) " " [:span.rank {:class (str "rank-" (:rank p))} (:rank p)]])
+  [:p [:span.rank {:class (str "rank-" (:rank p))} (:rank p)] (:name p)])
 
 (defn player-list [players]
   [:ul.players (map (fn [p] [:li {:key (rand)} (player p)]) players)])
