@@ -10,7 +10,9 @@ It works it out from the garbled text you just pasted which is quite convenient.
 
 It will build as many teams as possible, but some people won't fit in a 10 player game, so they are left at the bottom of the page as the "remainder".
 
+<p align="center">
 ![example][]
+</p>
 
 ## Author
 
