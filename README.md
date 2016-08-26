@@ -20,7 +20,6 @@ Since this is written in ClojureScript you'll need [leiningen][] to work on it. 
 
  * `make dev` - Start the development ([figwheel][]) server, you'll need to open `public/index.html` via `file://`.
  * `make release` - Compile everything for release. You'll have to commit the new JavaScript to release it.
- * `make clean` - Removes build artifacts.
 
 ## Author
 

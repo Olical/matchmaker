@@ -1,15 +1,12 @@
-.PHONY: clean release dev
+.PHONY: release dev
 
-default: release
-
-clean:
+release:
 	lein clean
-
-release: clean
+	rm -rf docs
 	lein release
 	cp -r public docs
 	rm -rf docs/js/release
-	@echo "Commit the changes to 'docs' directory to release on GitHub pages."
+	@echo "Done! Commit the changes to 'docs' directory to release on GitHub pages."
 
 dev:
 	lein figwheel
