@@ -5,6 +5,7 @@
 (defonce players-tsv (atom ""))
 (defonce attendance-tsv (atom ""))
 (defonce shuffle-count (atom 0))
+(defonce prefer-higher-ranks (atom false))
 
 (def rank-scores
   {"NONE" 0
@@ -52,15 +53,17 @@
   (filter (fn [p] (attendance (:name p))) players))
 
 (defn teams-by-skill [players]
-  (loop [ps (sort-by #(rank-scores (:rank %)) players)
+  (loop [ps (cond->> players
+                     true (sort-by #(rank-scores (:rank %)))
+                     @prefer-higher-ranks (reverse))
          teams []]
-    (if (< (count ps) 10)
-      {:teams teams
-       :remainder ps}
-      (let [game (shuffle (take 10 ps))
-            a (take 5 game)
-            b (drop 5 game)]
-        (recur (drop 10 ps) (conj teams [a b]))))))
+        (if (< (count ps) 10)
+          {:teams teams
+           :remainder ps}
+          (let [game (shuffle (take 10 ps))
+                a (take 5 game)
+                b (drop 5 game)]
+            (recur (drop 10 ps) (conj teams [a b]))))))
 
 (defn make-teams []
   (let [players (parse-players @players-tsv)
@@ -103,7 +106,13 @@
   @shuffle-count
   (let [result (make-teams)]
     [:section.results
-     [:button {:on-click #(swap! shuffle-count inc)} "Shuffle!"]
+     [:button.shuffle {:on-click #(swap! shuffle-count inc)} "Shuffle"]
+     [:section.prefer-higher-ranks
+      [:input#prefer-higher-ranks-checkbox
+       {:type "checkbox"
+        :checked @prefer-higher-ranks
+        :on-change #(swap! prefer-higher-ranks not)}]
+      [:label {:for "prefer-higher-ranks-checkbox"} "Try to build higher rank teams instead?"]]
      [:section.teams
       [:h3 "Teams"]
       (team-list (:teams result))]
