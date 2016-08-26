@@ -89,18 +89,18 @@
   [:p (:name p) " " [:span.rank {:class (str "rank-" (:rank p))} (:rank p)]])
 
 (defn player-list [players]
-  [:ul.players (map (fn [p] [:li {:key (hash p)} (player p)]) players)])
+  [:ul.players (map (fn [p] [:li {:key (rand)} (player p)]) players)])
 
 (defn team [t]
   [:section.team-pair
    [:section.team-a
     (player-list (-> t (first)))]
-   [:h4.vs "vs"]
+   [:h3.vs "vs"]
    [:section.team-b
     (player-list (-> t (second)))]])
 
 (defn team-list [teams]
-  [:ul.teams (map (fn [t] [:li {:key (hash t)} (team t)]) teams)])
+  [:ul.teams (map (fn [t] [:li {:key (rand)} (team t)]) teams)])
 
 (defn results []
   @shuffle-count
@@ -114,10 +114,9 @@
         :on-change #(swap! prefer-higher-ranks not)}]
       [:label {:for "prefer-higher-ranks-checkbox"} "Try to build higher rank teams instead?"]]
      [:section.teams
-      [:h3 "Teams"]
       (team-list (:teams result))]
      [:section.remainder
-      [:h3 "Remainder"]
+      [:h2 "Remainder"]
       (player-list (:remainder result))]]))
 
 (defn root []
@@ -135,7 +134,7 @@
      (or (empty? @players-tsv)
          (empty? @attendance-tsv)) [:p.incomplete (:incomplete help-messages)]
      (results))
-   [:p.credit "Built with <3 by " [:a {:href "https://github.com/Olical"} "Olical"] "."]])
+   [:p.credit "Built with parenthesis and <3 by " [:a {:href "https://github.com/Olical"} "Olical"] " (beauty is not my strong point...)"]])
 
 ;; -------------------------
 ;; Initialize app

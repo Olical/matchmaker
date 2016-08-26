@@ -1,5 +1,9 @@
 @import 'normalize.css';
 
+a:hover {
+  cursor: pointer;
+}
+
 .root {
   display: flex;
   flex-direction: column;
@@ -19,4 +23,75 @@
 
 .editors .editor:first-child {
   margin-right: 1em;
+}
+
+.shuffle {
+  margin-right: 1em;
+}
+
+.prefer-higher-ranks {
+  display: inline-block;
+}
+
+.prefer-higher-ranks input {
+  margin-right: 0.3em;
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+}
+
+.teams li {
+  flex-grow: 1;
+}
+
+.team-pair {
+  display: flex;
+  align-items: center;
+}
+
+.team-pair section {
+  flex-grow: 1;
+}
+
+.team-pair .players {
+  list-style: none;
+  margin: none;
+  padding: 0;
+}
+
+.team-pair .vs {
+  text-align: center;
+  font-style: italic;
+  font-size: 5em;
+  line-height: 0;
+  padding: 0 1em;
+  margin: 0;
+}
+
+.team-pair .team-a {
+  text-align: right;
+}
+
+.remainder {
+  text-align: center;
+}
+
+.remainder ul {
+  list-style: none;
+  padding: 0;
+}
+
+.credit {
+  text-align: right;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in;
+}
+
+.credit:hover {
+  opacity: 1;
 }
