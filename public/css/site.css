@@ -1,1 +1,22 @@
 @import 'normalize.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 4em;
+}
+
+.editors {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.editors .editor {
+  flex-grow: 1;
+  resize: none;
+  height: 15em;
+}
+
+.editors .editor:first-child {
+  margin-right: 1em;
+}

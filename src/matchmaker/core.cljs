@@ -122,11 +122,20 @@
 
 (defn root []
   [:section.root
+   [:h1.title "TAW CS:GO team builder"]
+   [:p.introduction
+    "This tool helps the " [:a {:href "http://taw.net/"} "taw.net"]
+    " CS:GO division to build (fairly) balanced teams for our regular training games. It's written in "
+    [:a {:href "http://clojurescript.org/"} "ClojureScript"] ", you can find the source on "
+    [:a {:href "https://github.com/TAW-CSGO/matchmaker"} "GitHub"] ". "
+    "To build the teams, you need to paste our members / ranks table and today's "
+    "attendance list into the boxes below."]
    (tsv-editors)
    (if
      (or (empty? @players-tsv)
          (empty? @attendance-tsv)) [:p.incomplete (:incomplete help-messages)]
-     (results))])
+     (results))
+   [:p.credit "Built with <3 by " [:a {:href "https://github.com/Olical"} "Olical"] "."]])
 
 ;; -------------------------
 ;; Initialize app
