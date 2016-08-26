@@ -122,9 +122,9 @@
 
 (defn root []
   [:section.root
-   [:h1.title "TAW CS:GO team builder"]
+   [:h1.title "TAW.net CS:GO team builder"]
    [:p.introduction
-    "This tool helps the " [:a {:href "http://taw.net/"} "taw.net"]
+    "This tool helps the " [:a {:href "http://taw.net/"} "TAW.net"]
     " CS:GO division to build (fairly) balanced teams for our regular training games. It's written in "
     [:a {:href "http://clojurescript.org/"} "ClojureScript"] ", you can find the source on "
     [:a {:href "https://github.com/TAW-CSGO/matchmaker"} "GitHub"] ". "
