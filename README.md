@@ -18,6 +18,8 @@ It will build as many teams as possible, but some people won't fit in a 10 playe
 
 Since this is written in ClojureScript you'll need [leiningen][] to work on it. You can install it through your package manager.
 
+Be sure not to edit the `docs` directory by hand. This is the compiled output, you should edit `src` and `public` instead. It needs to be in git for GitHub pages to work.
+
  * `make dev` - Start the development ([figwheel][]) server, you'll need to open `public/index.html` via `file://`.
  * `make release` - Compile everything for release. You'll have to commit the new JavaScript to release it.
 
