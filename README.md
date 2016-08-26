@@ -11,8 +11,16 @@ It works it out from the garbled text you just pasted which is quite convenient.
 It will build as many teams as possible, but some people won't fit in a 10 player game, so they are left at the bottom of the page as the "remainder".
 
 <p align="center">
-![example][]
+<img src="example.png">
 </p>
+
+## Development
+
+Since this is written in ClojureScript you'll need [leiningen][] to work on it. You can install it through your package manager.
+
+ * `make dev` - Start the development ([figwheel][]) server, you'll need to open `public/index.html` via `file://`.
+ * `make release` - Compile everything for release. You'll have to commit the new JavaScript to release it.
+ * `make clean` - Removes build artifacts.
 
 ## Author
 
@@ -33,4 +41,5 @@ Do what you want. Learn as much as you can. Unlicense more software.
 [unlicense]: http://unlicense.org/
 [author-site]: http://oli.me.uk/
 [author-twitter]: https://twitter.com/OliverCaldwell
-[example]: ./example.png
+[leiningen]: http://leiningen.org/
+[figwheel]: https://github.com/bhauman/lein-figwheel[]
