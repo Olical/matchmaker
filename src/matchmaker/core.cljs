@@ -34,7 +34,7 @@
 
 (defn columns [tsv]
   (let [rows (string/split tsv #"\n")
-        cols (map #(string/split % #"\t") rows)]
+        cols (map #(string/split % #"[\t\s]") rows)]
     cols))
 
 (defn parse-players [tsv]
