@@ -52,16 +52,21 @@ a:hover {
 .team-pair {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .team-pair section {
   flex-grow: 1;
 }
 
-.team-pair .players {
+.players {
   list-style: none;
   margin: none;
   padding: 0;
+}
+
+.players li {
+  line-height: 32px;
 }
 
 .team-pair .vs {
@@ -71,6 +76,7 @@ a:hover {
   line-height: 0;
   padding: 0 1em;
   margin: 0;
+  opacity: 0.8;
 }
 
 .team-a {
@@ -79,6 +85,8 @@ a:hover {
 
 .rank {
   margin-right: 0.5em;
+  width: 80px;
+  vertical-align: middle;
 }
 
 .team-a .rank {
