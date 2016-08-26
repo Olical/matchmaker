@@ -5,6 +5,33 @@
 (defonce players-tsv (atom ""))
 (defonce attendance-tsv (atom ""))
 
+(def rank-scores
+  {"NONE" 0
+   "S1"   5
+   "S2"   15
+   "S3"   25
+   "S4"   35
+   "SE"   45
+   "SEM"  55
+   "GN1"  65
+   "GN2"  75
+   "GN3"  85
+   "GNM"  95
+   "MG1"  105
+   "MG2"  115
+   "MGE"  125
+   "DMG"  135
+   "LE"   145
+   "LEM"  155
+   "SMFC" 165
+   "GE"   175})
+
+(def help-messages {:incomplete (str "Please paste the players and their ranks"
+                                     " from the spreadsheet as well as today's"
+                                     " attendance into the boxes above. You can"
+                                     " literally copy and paste them by"
+                                     " highlighting them in your browser.")})
+
 (defn columns [tsv]
   (let [rows (string/split tsv #"\n")
         cols (map #(string/split % #"\t") rows)]
@@ -24,12 +51,15 @@
   (filter (fn [p] (attendance (:name p))) players))
 
 (defn teams-by-skill [players]
-  {:teams [{:name "foobar"
-            :a {:name "foo"
-                :players (take 5 players)}
-            :b {:name "bar"
-                :players (take 5 (drop 5 players))}}]
-   :remainder players})
+  (loop [ps (sort-by #(rank-scores (:rank %)) players)
+         teams []]
+    (if (< (count ps) 10)
+      {:teams teams
+       :remainder ps}
+      (let [game (shuffle (take 10 ps))
+            a (take 5 game)
+            b (drop 5 game)]
+        (recur (drop 10 ps) (conj teams [a b]))))))
 
 (defn make-teams []
   (let [players (parse-players @players-tsv)
@@ -59,11 +89,11 @@
 
 (defn team [t]
   [:section.team-pair
-   [:section.team-a 
-    (player-list (-> t :a :players))]
+   [:section.team-a
+    (player-list (-> t (first)))]
    [:h4.vs "vs"]
    [:section.team-b
-    (player-list (-> t :b :players))]])
+    (player-list (-> t (second)))]])
 
 (defn team-list [teams]
   [:ul.teams (map (fn [t] [:li {:key (hash t)} (team t)]) teams)])
@@ -81,7 +111,10 @@
 (defn root []
   [:section.root
    (tsv-editors)
-   (results)])
+   (if
+     (or (empty? @players-tsv)
+         (empty? @attendance-tsv)) [:p.incomplete (:incomplete help-messages)]
+     (results))])
 
 ;; -------------------------
 ;; Initialize app
