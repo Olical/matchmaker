@@ -46,11 +46,13 @@
        (columns tsv)))
 
 (defn parse-attendance [tsv]
-  (let [pairs (map (fn [c] [(nth c 0) (= (nth c 1 nil) "attended")]) (columns tsv))]
+  (let [pairs (map (fn [c] [(string/lower-case (nth c 0))
+                            (= (nth c 1 nil) "attended")])
+                   (columns tsv))]
     (into (sorted-map) pairs)))
 
 (defn can-play [players attendance]
-  (filter (fn [p] (attendance (:name p))) players))
+  (filter (fn [p] (attendance (string/lower-case (:name p)))) players))
 
 (defn teams-by-skill [players]
   (loop [ps (cond->> players
